@@ -1,48 +1,85 @@
-# Oda Karşılaştırma Ekranı (Radar App)
+<div align="center">
+  
+# 📡 Wi-Fi Room Radar
 
-Oda Karşılaştırma Ekranı, cihazınızın ağ (Wi-Fi) bağlantı kararlılığını farklı odalar arasında ölçerek, ağ değişimine dayalı bir yer tahmini sunan açık kaynaklı bir araçtır. Ağ bağlantısındaki anlık sıçramalar, ping dalgalanmaları ve kopmaları analiz ederek "en fazla değişim olan odayı" belirlemeye çalışır.
+**Akıllı Ağ ve Konum Analiz Aracı**
 
-> **Önemli:** Bu program kesin bir cihaz veya kişi konumu bulmaz; tamamen Wi-Fi / bağlantı gecikme paternlerine (ping değişimine) dayalı tahmini bir analiz sunar.
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey)](#)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-## Özellikler
+Ağınızdaki cihazların (veya sizin) farklı odalardaki bağlantı kararlılığını analiz eden, gecikme sıçramalarını yakalayan ve verileri istatistiksel olarak karşılaştıran modern bir açık kaynaklı uygulamadır.
 
-- **Ping Analizi:** Belirtilen IP adresine aralıklı ping göndererek süreleri kaydeder.
-- **İstatistiksel Hesaplama:** Anlık ağ yavaşlamalarını filtreleyerek, her odanın standart gecikmesini, kayıp oranını ve değişim skorunu hesaplar.
-- **Canlı Grafik:** Taranan odadaki anlık ping değerini, olağan seviyeyi ve uyarı sınırını interaktif bir grafik üzerinde canlı gösterir.
-- **Odalar Arası Karşılaştırma:** Birden fazla odayı taradığınızda sonuçları kıyaslayarak hangi odanın daha tutarlı, hangisinin daha dalgalı olduğunu tespit eder.
-- **Kayıt Alma (CSV):** Taranan sonuçları otomatik olarak `.csv` formatında aynı dizine kaydeder, böylece daha sonra analiz edebilirsiniz.
-- **Kullanıcı Dostu Arayüz:** Gelişmiş, modern ve şık bir karanlık (dark) tema arayüzüne sahiptir. Butonlardaki 'hover' etkileşimleriyle pürüzsüz bir deneyim sunar.
+[Özellikler](#-özellikler) • [Kurulum](#-kurulum) • [Nasıl Kullanılır](#-nasıl-kullanılır) • [Lisans](#-lisans)
 
-## Kurulum ve Çalıştırma
+</div>
 
-Program tamamen standart kütüphaneler kullanılarak yazılmıştır. Bu nedenle ek bir bağımlılık kurmanıza gerek yoktur, doğrudan çalıştırabilirsiniz.
+---
 
-**Gereksinimler:**
-- Python 3.10 veya üzeri
-- Windows, macOS veya Linux
+## 🚀 Proje Hakkında
 
-**Nasıl Çalıştırılır:**
+**Wi-Fi Room Radar**, sadece bir ping aracı değildir. Wi-Fi bağlantısının doğası gereği olan anlık dalgalanmaları ve gecikme (latency) paternlerini kullanarak, ağ kalitesini ve cihazların ağ içerisindeki tahmini konum/oda değişimlerini istatistiksel olarak anlamlandırır.
 
-1. Kodu bilgisayarınıza indirin.
-2. Terminal veya Komut İstemini (CMD) açarak dosyanın bulunduğu klasöre gidin.
-3. Aşağıdaki komutu çalıştırın:
+> **⚠️ Önemli Not:** Bu uygulama GPS benzeri kesin bir koordinat sağlamaz; tamamen ağ trafiğindeki gecikme paternlerine (ping) ve sinyal sapmalarına dayalı tahmini ve kıyaslamalı bir sonuç üretir.
+
+<br>
+
+## ✨ Özellikler
+
+| Özellik | Açıklama |
+| :--- | :--- |
+| 📊 **Anlık Grafik Analizi** | Taranan odadaki ping değerlerini, genel ortalamayı (baseline) ve uyarı sınırlarını canlı ve akıcı bir grafikte çizer. |
+| 🧮 **Akıllı İstatistik Motoru** | Ağdaki normal dalgalanmaları (jitter) ayıklar. Yalnızca gerçek fiziksel ve çevresel değişimlerden kaynaklı sıçramaları tespit eder. |
+| 🏆 **Odalar Arası Kıyaslama** | Birden fazla odada yapılan ölçümleri yan yana koyarak, ağ kalitesinin en tutarlı veya en sorunlu olduğu bölgeleri belirler. |
+| 💾 **Otomatik CSV Kaydı** | Tüm ölçümler ve hesaplanan "değişim skorları" daha sonra incelenebilmesi için otomatik olarak bir Excel/CSV dosyasına kaydedilir. |
+| 🎨 **Modern ve Şık Arayüz** | Göz yormayan karanlık tema (Dark Mode), dinamik "hover" efektleri ve pürüzsüz yerleşim düzeni ile kusursuz bir kullanıcı deneyimi sunar. |
+
+<br>
+
+## 🛠 Kurulum
+
+Bu proje **%100 saf Python** ile geliştirilmiştir. Ekstra hiçbir `pip` paketine veya harici bağımlılığa ihtiyacınız yoktur. Sadece bilgisayarınızda Python yüklü olması yeterlidir.
+
 ```bash
+# 1. Projeyi bilgisayarınıza klonlayın
+git clone https://github.com/Winslowe/wifi-room-radar.git
+
+# 2. Proje dizinine girin
+cd wifi-room-radar
+
+# 3. Uygulamayı başlatın
 python a.py
 ```
 
-## Nasıl Kullanılır?
+<br>
 
-1. **IP Adresini Girin:** Program açıldığında sağ üst köşedeki kutuya ölçmek istediğiniz cihazın yerel ağdaki IP adresini yazın (Örn: `192.168.1.102`).
-2. **Oda Adı Yazın:** Uygulamanın üst panelindeki giriş alanına şu an bulunduğunuz odanın adını yazın (Örn: `Salon`, `Yatak Odası`).
-3. **Taramayı Başlatın:** "BU ODAYI TARA" butonuna basın ve tarama bitene kadar cihazınızın yerini değiştirmeyin. (Tarama süresince veri indirme gibi işlemleri durdurmanız daha net sonuçlar verir.)
-4. **Diğer Odaya Geçin:** İlk odanın 50 ölçümü bittiğinde diğer bir odaya gidin, yeni odanın adını yazıp tekrar "BU ODAYI TARA"ya basın.
-5. **Karşılaştırma Yapın:** En az 2 odanın taraması bittiğinde "ODALARI BİTİR" butonuna basarak programın odaları kıyaslamasını sağlayın.
+## 📖 Nasıl Kullanılır?
 
-## Test Modu (Geliştiriciler İçin)
-Arayüzü açmadan sistemin hesaplama mantığını test etmek isterseniz komut satırından `--test` argümanı ile çalıştırabilirsiniz:
+1. **Hedefi Belirleyin:** Program açıldığında `ÖLÇÜLECEK CİHAZIN IP ADRESİ` kısmına modeminizin veya ağdaki test cihazınızın IP adresini girin (Örn: `192.168.1.1`).
+2. **Konumunuzu Girin:** `1. Bulunduğun odanın adını yaz` kısmına şu anki konumunuzu yazın (Örn: `Salon`).
+3. **Analizi Başlatın:** `BU ODAYI TARA` butonuna basarak 50 pinglik analiz testini başlatın. Bu süreçte cihazınızı sabit tutmanız verilerin sağlığı için önemlidir.
+4. **Keşfe Çıkın:** İlk oda tamamlandığında, farklı bir odaya geçip aynı işlemleri tekrarlayın.
+5. **Sonuçları Karşılaştırın:** İşlemler bittiğinde `ODALARI BİTİR` butonuna basarak tüm odaların istatistiksel kıyaslamasını anında görün!
+
+<br>
+
+## 🧪 Test Modu (Geliştiriciler İçin)
+
+Eğer UI arayüzünü açmadan, programın çekirdek istatistik ve ping analiz algoritmalarının düzgün çalışıp çalışmadığını doğrulamak isterseniz:
+
 ```bash
 python a.py --test
 ```
+Bu komut, sahte (mock) verilerle programın karar alma mekanizmasını hızlıca test eder ve komut satırına rapor verir.
 
-## Lisans
-Bu proje açık kaynaklıdır ve özgürce kullanılabilir, değiştirilebilir. Herhangi bir soruluk kabul edilmez.
+<br>
+
+## 📜 Lisans
+
+Bu proje **MIT Lisansı** ile lisanslanmıştır. Daha fazla bilgi için `LICENSE` dosyasına göz atabilirsiniz. Kodu dilediğiniz gibi kullanabilir, değiştirebilir ve kendi projelerinizde (ticari dahil) değerlendirebilirsiniz.
+
+---
+<div align="center">
+  <i>Winslowe tarafından ❤️ ile geliştirilmiştir.</i>
+</div>
